@@ -239,9 +239,9 @@
             this.Title.Font = new System.Drawing.Font("Bookman Old Style", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Title.Location = new System.Drawing.Point(412, 9);
             this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(287, 28);
+            this.Title.Size = new System.Drawing.Size(265, 28);
             this.Title.TabIndex = 6;
-            this.Title.Text = "Serial Communication ";
+            this.Title.Text = "Serial GUI Connector";
             this.Title.Click += new System.EventHandler(this.Title_Click);
             // 
             // SerialCom
