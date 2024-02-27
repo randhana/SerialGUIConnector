@@ -1,1 +1,1 @@
-# RxTx with Arduino
+# SerialComGUI is a simple C# program that helps you talk to devices using serial ports, like Arduino or other microcontrollers. It gives you buttons and text boxes to easily send and receive data. It's great for beginners and experts who want an easy way to work with serial devices.
