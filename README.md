@@ -1,1 +1,4 @@
-# SerialComGUI is a simple C# program that helps you talk to devices using serial ports, like Arduino or other microcontrollers. It gives you buttons and text boxes to easily send and receive data. It's great for beginners and experts who want an easy way to work with serial devices.
+# SerialComGUI
+
+SerialComGUI is a straightforward C# program designed to facilitate communication with devices using serial ports, such as Arduino or other microcontrollers. It provides intuitive buttons and text boxes for effortless data transmission and reception. Whether you're a beginner or an expert, SerialComGUI offers a convenient solution for interacting with serial devices.
+
