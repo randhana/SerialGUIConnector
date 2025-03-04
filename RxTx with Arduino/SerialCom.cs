@@ -295,5 +295,15 @@ namespace RxTx_with_Arduino
         {
 
         }
+
+        private void button_browsefile_HelpRequest(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button_browsefile_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
