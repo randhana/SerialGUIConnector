@@ -49,9 +49,11 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.button_browsefile = new System.Windows.Forms.Button();
             this.textbox_filepath = new System.Windows.Forms.Label();
-            this.textBox_interval = new System.Windows.Forms.TextBox();
             this.button_start_repeat = new System.Windows.Forms.Button();
+            this.textBox_interval = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textBox_interval)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -72,7 +74,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.groupBox1.Size = new System.Drawing.Size(273, 346);
+            this.groupBox1.Size = new System.Drawing.Size(273, 334);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "         Serial Com Settings";
@@ -205,10 +207,10 @@
             // button_SEND
             // 
             this.button_SEND.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_SEND.Location = new System.Drawing.Point(845, 254);
+            this.button_SEND.Location = new System.Drawing.Point(845, 257);
             this.button_SEND.Margin = new System.Windows.Forms.Padding(4);
             this.button_SEND.Name = "button_SEND";
-            this.button_SEND.Size = new System.Drawing.Size(117, 44);
+            this.button_SEND.Size = new System.Drawing.Size(117, 29);
             this.button_SEND.TabIndex = 3;
             this.button_SEND.Text = "Send";
             this.button_SEND.UseVisualStyleBackColor = true;
@@ -255,9 +257,9 @@
             // 
             // button_browsefile
             // 
-            this.button_browsefile.Location = new System.Drawing.Point(845, 305);
+            this.button_browsefile.Location = new System.Drawing.Point(845, 213);
             this.button_browsefile.Name = "button_browsefile";
-            this.button_browsefile.Size = new System.Drawing.Size(117, 36);
+            this.button_browsefile.Size = new System.Drawing.Size(117, 34);
             this.button_browsefile.TabIndex = 8;
             this.button_browsefile.Text = "Browse";
             this.button_browsefile.UseVisualStyleBackColor = true;
@@ -266,22 +268,15 @@
             // textbox_filepath
             // 
             this.textbox_filepath.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textbox_filepath.Location = new System.Drawing.Point(277, 316);
+            this.textbox_filepath.Location = new System.Drawing.Point(277, 310);
             this.textbox_filepath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.textbox_filepath.Name = "textbox_filepath";
             this.textbox_filepath.Size = new System.Drawing.Size(333, 25);
             this.textbox_filepath.TabIndex = 11;
             // 
-            // textBox_interval
-            // 
-            this.textBox_interval.Location = new System.Drawing.Point(659, 287);
-            this.textBox_interval.Name = "textBox_interval";
-            this.textBox_interval.Size = new System.Drawing.Size(100, 22);
-            this.textBox_interval.TabIndex = 12;
-            // 
             // button_start_repeat
             // 
-            this.button_start_repeat.Location = new System.Drawing.Point(714, 309);
+            this.button_start_repeat.Location = new System.Drawing.Point(845, 293);
             this.button_start_repeat.Name = "button_start_repeat";
             this.button_start_repeat.Size = new System.Drawing.Size(117, 36);
             this.button_start_repeat.TabIndex = 13;
@@ -289,14 +284,34 @@
             this.button_start_repeat.UseVisualStyleBackColor = true;
             this.button_start_repeat.Click += new System.EventHandler(this.button_start_repeat_Click_1);
             // 
+            // textBox_interval
+            // 
+            this.textBox_interval.Location = new System.Drawing.Point(782, 301);
+            this.textBox_interval.Name = "textBox_interval";
+            this.textBox_interval.Size = new System.Drawing.Size(57, 22);
+            this.textBox_interval.TabIndex = 14;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(685, 301);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(90, 25);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "intervals";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label2.Click += new System.EventHandler(this.label2_Click_1);
+            // 
             // SerialCom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(967, 346);
-            this.Controls.Add(this.button_start_repeat);
+            this.ClientSize = new System.Drawing.Size(967, 334);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox_interval);
+            this.Controls.Add(this.button_start_repeat);
             this.Controls.Add(this.textbox_filepath);
             this.Controls.Add(this.button_browsefile);
             this.Controls.Add(this.Title);
@@ -315,6 +330,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SerialCom_FormClosed);
             this.Load += new System.EventHandler(this.SerialCom_Load);
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.textBox_interval)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,8 +358,9 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button_browsefile;
         private System.Windows.Forms.Label textbox_filepath;
-        private System.Windows.Forms.TextBox textBox_interval;
         private System.Windows.Forms.Button button_start_repeat;
+        private System.Windows.Forms.NumericUpDown textBox_interval;
+        private System.Windows.Forms.Label label2;
     }
 }
 

@@ -33,9 +33,11 @@ namespace RxTx_with_Arduino
             buttonOPEN.Enabled = true;
             button_CLOSE.Enabled = false;
             button_SEND.Enabled = false;
+            button_start_repeat.Enabled = false;
             button_browsefile.Enabled = false;
             progressBar_STATUSbar.Value = 0;
             labelSTATUS.Text = "Disconnected";
+            button_start_repeat.Text = "Start Repeating";
             labelSTATUS.ForeColor = Color.Red;
 
             comboBox_BAUD_RATE.Text = "9600";
@@ -55,8 +57,10 @@ namespace RxTx_with_Arduino
                 button_CLOSE.Enabled = true;
                 button_SEND.Enabled = true;
                 button_browsefile.Enabled = true;
+                button_start_repeat.Enabled = true;
                 progressBar_STATUSbar.Value = 100;
                 labelSTATUS.Text = "CONNECTED";
+                button_start_repeat.Text = "Start Repeating";
                 labelSTATUS.ForeColor = Color.Green;
 
                 comboBox_BAUD_RATE.Text = "9600";
@@ -79,6 +83,7 @@ namespace RxTx_with_Arduino
                     button_CLOSE.Enabled = false;
                     button_SEND.Enabled = false;
                     button_browsefile.Enabled = false;
+                    button_start_repeat.Enabled = false;
                     progressBar_STATUSbar.Value = 0;
                     labelSTATUS.Text = "Disconnected";
                     richTextBox_Txt_Receiver.Text = "";
@@ -238,43 +243,7 @@ namespace RxTx_with_Arduino
             }
         }
 
-        private void button_start_repeat_Click(object sender, EventArgs e)
-        {
-            if (!serialPort1.IsOpen)
-            {
-                MessageBox.Show("Please open the serial port first!");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(fileContent))
-            {
-                MessageBox.Show("Please load a text file first!");
-                return;
-            }
-
-            if (!int.TryParse(textBox_interval.Text, out int intervalSeconds) || intervalSeconds <= 0)
-            {
-                MessageBox.Show("Please enter a valid interval in seconds!");
-                return;
-            }
-
-            if (!isRepeating)
-            {
-                repeatTimer.Interval = intervalSeconds * 1000;
-                repeatTimer.Start();
-                isRepeating = true;
-                button_start_repeat.Text = "Stop Repeating";
-                sending_Status.Text = "Repeating every " + intervalSeconds + " seconds";
-            }
-            else
-            {
-                repeatTimer.Stop();
-                isRepeating = false;
-                button_start_repeat.Text = "Start Repeating";
-                sending_Status.Text = "Ready";
-                sending_Status.ForeColor = Color.Gray;
-            }
-        }
+       
 
         private void RepeatTimerElapsed(object sender, ElapsedEventArgs e)
         {
@@ -342,6 +311,9 @@ namespace RxTx_with_Arduino
             }
         }
 
-        
+        private void label2_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
