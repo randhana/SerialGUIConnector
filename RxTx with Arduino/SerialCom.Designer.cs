@@ -49,9 +49,9 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.button_browsefile = new System.Windows.Forms.Button();
             this.textbox_filepath = new System.Windows.Forms.Label();
-            this.button_start_repeat = new System.Windows.Forms.Button();
             this.textBox_interval = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
+            this.button_start_repeat = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBox_interval)).BeginInit();
             this.SuspendLayout();
@@ -274,16 +274,6 @@
             this.textbox_filepath.Size = new System.Drawing.Size(333, 25);
             this.textbox_filepath.TabIndex = 11;
             // 
-            // button_start_repeat
-            // 
-            this.button_start_repeat.Location = new System.Drawing.Point(845, 293);
-            this.button_start_repeat.Name = "button_start_repeat";
-            this.button_start_repeat.Size = new System.Drawing.Size(117, 36);
-            this.button_start_repeat.TabIndex = 13;
-            this.button_start_repeat.Text = "Start Repeating";
-            this.button_start_repeat.UseVisualStyleBackColor = true;
-            this.button_start_repeat.Click += new System.EventHandler(this.button_start_repeat_Click_1);
-            // 
             // textBox_interval
             // 
             this.textBox_interval.Location = new System.Drawing.Point(782, 301);
@@ -294,14 +284,23 @@
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(685, 301);
+            this.label2.Location = new System.Drawing.Point(695, 301);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 25);
+            this.label2.Size = new System.Drawing.Size(80, 25);
             this.label2.TabIndex = 15;
-            this.label2.Text = "intervals";
+            this.label2.Text = "intervals:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label2.Click += new System.EventHandler(this.label2_Click_1);
+            // 
+            // button_start_repeat
+            // 
+            this.button_start_repeat.Location = new System.Drawing.Point(845, 299);
+            this.button_start_repeat.Name = "button_start_repeat";
+            this.button_start_repeat.Size = new System.Drawing.Size(110, 27);
+            this.button_start_repeat.TabIndex = 16;
+            this.button_start_repeat.Text = "Start Repeating";
+            this.button_start_repeat.UseVisualStyleBackColor = true;
             // 
             // SerialCom
             // 
@@ -309,9 +308,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(967, 334);
+            this.Controls.Add(this.button_start_repeat);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox_interval);
-            this.Controls.Add(this.button_start_repeat);
             this.Controls.Add(this.textbox_filepath);
             this.Controls.Add(this.button_browsefile);
             this.Controls.Add(this.Title);
@@ -358,9 +357,9 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button_browsefile;
         private System.Windows.Forms.Label textbox_filepath;
-        private System.Windows.Forms.Button button_start_repeat;
         private System.Windows.Forms.NumericUpDown textBox_interval;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button_start_repeat;
     }
 }
 
