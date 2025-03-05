@@ -52,6 +52,7 @@
             this.textBox_interval = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.button_start_repeat = new System.Windows.Forms.Button();
+            this.comboBox_lineEnding = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBox_interval)).BeginInit();
             this.SuspendLayout();
@@ -301,6 +302,15 @@
             this.button_start_repeat.TabIndex = 16;
             this.button_start_repeat.Text = "Start Repeating";
             this.button_start_repeat.UseVisualStyleBackColor = true;
+            this.button_start_repeat.Click += new System.EventHandler(this.button_start_repeat_Click);
+            // 
+            // comboBox_lineEnding
+            // 
+            this.comboBox_lineEnding.FormattingEnabled = true;
+            this.comboBox_lineEnding.Location = new System.Drawing.Point(556, 298);
+            this.comboBox_lineEnding.Name = "comboBox_lineEnding";
+            this.comboBox_lineEnding.Size = new System.Drawing.Size(121, 24);
+            this.comboBox_lineEnding.TabIndex = 17;
             // 
             // SerialCom
             // 
@@ -308,6 +318,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(967, 334);
+            this.Controls.Add(this.comboBox_lineEnding);
             this.Controls.Add(this.button_start_repeat);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox_interval);
@@ -360,6 +371,7 @@
         private System.Windows.Forms.NumericUpDown textBox_interval;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button_start_repeat;
+        private System.Windows.Forms.ComboBox comboBox_lineEnding;
     }
 }
 

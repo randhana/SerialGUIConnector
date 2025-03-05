@@ -40,6 +40,9 @@ namespace RxTx_with_Arduino
             button_start_repeat.Text = "Start Repeating";
             labelSTATUS.ForeColor = Color.Red;
 
+            comboBox_lineEnding.Items.AddRange(new string[] { "None", "Line Feed (LF)", "Carriage Return (CR)", "CR + LF (CRLF)" });
+            comboBox_lineEnding.SelectedIndex = 0;
+
             comboBox_BAUD_RATE.Text = "9600";
             string[] portLists = SerialPort.GetPortNames();
             comboBox_COM_PORT.Items.AddRange(portLists);
@@ -137,6 +140,7 @@ namespace RxTx_with_Arduino
                 if (!string.IsNullOrEmpty(textToSend))
                 {
                     serialPort1.Write(textToSend);
+                    serialPort1.Write(textToSend + GetLineEnding());
                     richTextBox_Txt_Receiver.Text += "";
                     textBox_Txt_Send.Text = "";
                     sending_Status.Text = "Message is sending...";
@@ -243,7 +247,7 @@ namespace RxTx_with_Arduino
             }
         }
 
-       
+
 
         private void RepeatTimerElapsed(object sender, ElapsedEventArgs e)
         {
@@ -251,12 +255,24 @@ namespace RxTx_with_Arduino
             {
                 if (serialPort1.IsOpen && !waitForEnd)
                 {
-                    serialPort1.Write(fileContent);
+                    serialPort1.Write(fileContent + GetLineEnding());
                     richTextBox_Txt_Receiver.Text += "";
                     sending_Status.Text = "Message sent (repeating)";
                     sending_Status.ForeColor = Color.Black;
                 }
             }));
+        }
+
+        private string GetLineEnding()
+        {
+            switch (comboBox_lineEnding.SelectedIndex)
+            {
+                case 1: return "\n"; // Line Feed (LF)
+                case 2: return "\r"; // Carriage Return (CR)
+                case 3: return "\r\n"; // CR + LF (CRLF)
+                case 0: // None
+                default: return "";
+            }
         }
 
         private void label1_Click(object sender, EventArgs e) { }
@@ -274,6 +290,16 @@ namespace RxTx_with_Arduino
         }
 
         private void button_start_repeat_Click_1(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button_start_repeat_Click(object sender, EventArgs e)
         {
             if (!serialPort1.IsOpen)
             {
@@ -309,11 +335,6 @@ namespace RxTx_with_Arduino
                 sending_Status.Text = "Ready";
                 sending_Status.ForeColor = Color.Gray;
             }
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
         }
     }
 }
