@@ -47,12 +47,11 @@
             this.sending_Status = new System.Windows.Forms.Label();
             this.Title = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.textbox_filepath = new System.Windows.Forms.TextBox();
             this.button_browsefile = new System.Windows.Forms.Button();
-            this.numeric_updown_interval = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
+            this.textbox_filepath = new System.Windows.Forms.Label();
+            this.textBox_interval = new System.Windows.Forms.TextBox();
+            this.button_start_repeat = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numeric_updown_interval)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -254,54 +253,41 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // textbox_filepath
-            // 
-            this.textbox_filepath.Location = new System.Drawing.Point(284, 313);
-            this.textbox_filepath.Name = "textbox_filepath";
-            this.textbox_filepath.ReadOnly = true;
-            this.textbox_filepath.Size = new System.Drawing.Size(380, 22);
-            this.textbox_filepath.TabIndex = 7;
-            // 
             // button_browsefile
             // 
-            this.button_browsefile.Location = new System.Drawing.Point(887, 313);
+            this.button_browsefile.Location = new System.Drawing.Point(845, 305);
             this.button_browsefile.Name = "button_browsefile";
-            this.button_browsefile.Size = new System.Drawing.Size(75, 23);
+            this.button_browsefile.Size = new System.Drawing.Size(117, 36);
             this.button_browsefile.TabIndex = 8;
             this.button_browsefile.Text = "Browse";
             this.button_browsefile.UseVisualStyleBackColor = true;
             this.button_browsefile.Click += new System.EventHandler(this.button_browsefile_Click);
             // 
-            // numeric_updown_interval
+            // textbox_filepath
             // 
-            this.numeric_updown_interval.Location = new System.Drawing.Point(792, 312);
-            this.numeric_updown_interval.Maximum = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.numeric_updown_interval.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numeric_updown_interval.Name = "numeric_updown_interval";
-            this.numeric_updown_interval.Size = new System.Drawing.Size(46, 22);
-            this.numeric_updown_interval.TabIndex = 9;
-            this.numeric_updown_interval.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
+            this.textbox_filepath.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textbox_filepath.Location = new System.Drawing.Point(277, 316);
+            this.textbox_filepath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.textbox_filepath.Name = "textbox_filepath";
+            this.textbox_filepath.Size = new System.Drawing.Size(333, 25);
+            this.textbox_filepath.TabIndex = 11;
             // 
-            // label2
+            // textBox_interval
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(670, 316);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(116, 16);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Interval (seconds):";
+            this.textBox_interval.Location = new System.Drawing.Point(659, 287);
+            this.textBox_interval.Name = "textBox_interval";
+            this.textBox_interval.Size = new System.Drawing.Size(100, 22);
+            this.textBox_interval.TabIndex = 12;
+            // 
+            // button_start_repeat
+            // 
+            this.button_start_repeat.Location = new System.Drawing.Point(714, 309);
+            this.button_start_repeat.Name = "button_start_repeat";
+            this.button_start_repeat.Size = new System.Drawing.Size(117, 36);
+            this.button_start_repeat.TabIndex = 13;
+            this.button_start_repeat.Text = "Start Repeating";
+            this.button_start_repeat.UseVisualStyleBackColor = true;
+            this.button_start_repeat.Click += new System.EventHandler(this.button_start_repeat_Click_1);
             // 
             // SerialCom
             // 
@@ -309,10 +295,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(967, 346);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.numeric_updown_interval);
-            this.Controls.Add(this.button_browsefile);
+            this.Controls.Add(this.button_start_repeat);
+            this.Controls.Add(this.textBox_interval);
             this.Controls.Add(this.textbox_filepath);
+            this.Controls.Add(this.button_browsefile);
             this.Controls.Add(this.Title);
             this.Controls.Add(this.sending_Status);
             this.Controls.Add(this.button1);
@@ -329,7 +315,6 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SerialCom_FormClosed);
             this.Load += new System.EventHandler(this.SerialCom_Load);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numeric_updown_interval)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -355,10 +340,10 @@
         private System.Windows.Forms.Label sending_Status;
         private System.Windows.Forms.Label Title;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.TextBox textbox_filepath;
         private System.Windows.Forms.Button button_browsefile;
-        private System.Windows.Forms.NumericUpDown numeric_updown_interval;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label textbox_filepath;
+        private System.Windows.Forms.TextBox textBox_interval;
+        private System.Windows.Forms.Button button_start_repeat;
     }
 }
 
