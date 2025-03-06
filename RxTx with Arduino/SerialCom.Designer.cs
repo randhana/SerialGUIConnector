@@ -46,7 +46,15 @@
             this.button1 = new System.Windows.Forms.Button();
             this.sending_Status = new System.Windows.Forms.Label();
             this.Title = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button_browsefile = new System.Windows.Forms.Button();
+            this.textbox_filepath = new System.Windows.Forms.Label();
+            this.textBox_interval = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button_start_repeat = new System.Windows.Forms.Button();
+            this.comboBox_lineEnding = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textBox_interval)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -67,7 +75,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.groupBox1.Size = new System.Drawing.Size(273, 314);
+            this.groupBox1.Size = new System.Drawing.Size(273, 334);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "         Serial Com Settings";
@@ -200,10 +208,10 @@
             // button_SEND
             // 
             this.button_SEND.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_SEND.Location = new System.Drawing.Point(845, 254);
+            this.button_SEND.Location = new System.Drawing.Point(845, 257);
             this.button_SEND.Margin = new System.Windows.Forms.Padding(4);
             this.button_SEND.Name = "button_SEND";
-            this.button_SEND.Size = new System.Drawing.Size(117, 44);
+            this.button_SEND.Size = new System.Drawing.Size(117, 29);
             this.button_SEND.TabIndex = 3;
             this.button_SEND.Text = "Send";
             this.button_SEND.UseVisualStyleBackColor = true;
@@ -244,12 +252,78 @@
             this.Title.Text = "Serial GUI Connector";
             this.Title.Click += new System.EventHandler(this.Title_Click);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // button_browsefile
+            // 
+            this.button_browsefile.Location = new System.Drawing.Point(845, 213);
+            this.button_browsefile.Name = "button_browsefile";
+            this.button_browsefile.Size = new System.Drawing.Size(117, 34);
+            this.button_browsefile.TabIndex = 8;
+            this.button_browsefile.Text = "Add File";
+            this.button_browsefile.UseVisualStyleBackColor = true;
+            this.button_browsefile.Click += new System.EventHandler(this.button_browsefile_Click);
+            // 
+            // textbox_filepath
+            // 
+            this.textbox_filepath.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textbox_filepath.Location = new System.Drawing.Point(277, 310);
+            this.textbox_filepath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.textbox_filepath.Name = "textbox_filepath";
+            this.textbox_filepath.Size = new System.Drawing.Size(333, 25);
+            this.textbox_filepath.TabIndex = 11;
+            // 
+            // textBox_interval
+            // 
+            this.textBox_interval.Location = new System.Drawing.Point(782, 301);
+            this.textBox_interval.Name = "textBox_interval";
+            this.textBox_interval.Size = new System.Drawing.Size(57, 22);
+            this.textBox_interval.TabIndex = 14;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(695, 301);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(80, 25);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "intervals:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label2.Click += new System.EventHandler(this.label2_Click_1);
+            // 
+            // button_start_repeat
+            // 
+            this.button_start_repeat.Location = new System.Drawing.Point(845, 299);
+            this.button_start_repeat.Name = "button_start_repeat";
+            this.button_start_repeat.Size = new System.Drawing.Size(110, 27);
+            this.button_start_repeat.TabIndex = 16;
+            this.button_start_repeat.Text = "Start Repeating";
+            this.button_start_repeat.UseVisualStyleBackColor = true;
+            this.button_start_repeat.Click += new System.EventHandler(this.button_start_repeat_Click);
+            // 
+            // comboBox_lineEnding
+            // 
+            this.comboBox_lineEnding.FormattingEnabled = true;
+            this.comboBox_lineEnding.Location = new System.Drawing.Point(556, 298);
+            this.comboBox_lineEnding.Name = "comboBox_lineEnding";
+            this.comboBox_lineEnding.Size = new System.Drawing.Size(121, 24);
+            this.comboBox_lineEnding.TabIndex = 17;
+            // 
             // SerialCom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(967, 314);
+            this.ClientSize = new System.Drawing.Size(967, 334);
+            this.Controls.Add(this.comboBox_lineEnding);
+            this.Controls.Add(this.button_start_repeat);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBox_interval);
+            this.Controls.Add(this.textbox_filepath);
+            this.Controls.Add(this.button_browsefile);
             this.Controls.Add(this.Title);
             this.Controls.Add(this.sending_Status);
             this.Controls.Add(this.button1);
@@ -266,6 +340,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SerialCom_FormClosed);
             this.Load += new System.EventHandler(this.SerialCom_Load);
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.textBox_interval)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -290,6 +365,13 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label sending_Status;
         private System.Windows.Forms.Label Title;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button button_browsefile;
+        private System.Windows.Forms.Label textbox_filepath;
+        private System.Windows.Forms.NumericUpDown textBox_interval;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button_start_repeat;
+        private System.Windows.Forms.ComboBox comboBox_lineEnding;
     }
 }
 
