@@ -139,15 +139,17 @@ namespace RxTx_with_Arduino
 
                 if (!string.IsNullOrEmpty(textToSend))
                 {
-                    serialPort1.Write(textToSend);
                     serialPort1.Write(textToSend + GetLineEnding());
                     richTextBox_Txt_Receiver.Text += "";
                     textBox_Txt_Send.Text = "";
-                    sending_Status.Text = "Message is sending...";
+                    sending_Status.Text = "Message Sent"; // Immediate update
                     sending_Status.ForeColor = Color.Black;
-                    button_SEND.Enabled = false;
+                    button_SEND.Enabled = true; // Re-enable immediately
+                    waitForEnd = false; // Reset for repeat
+                    textbox_filepath.Text = ""; // clear the file path
+                    fileContent = ""; // Clear fileContent after send
 
-                    //textbox_filepath.Text = ""; // Clears path but keeps fileContent
+
                 }
                 else
                 {
@@ -175,29 +177,21 @@ namespace RxTx_with_Arduino
             if (sending_Status.Text == "Ready")
             {
                 receivingStatusAsync();
-                // Send \n to acknowledge receipt when data is fully received
-                if (serialPort1.IsOpen)
-                {
-                    serialPort1.Write("\n");
-                }
+                // No acknowledgment: //serialPort1.Write("\n");
             }
-
             richTextBox_Txt_Receiver.Text += serialDataIn;
         }
 
         private async void sendingStatus()
         {
-            if (serialDataIn.Contains('\n'))
-            {
-                button_SEND.Enabled = true;
-                button_browsefile.Enabled = true;
-                sending_Status.Text = "Message Sent";
-                sending_Status.ForeColor = Color.Black;
-                await Task.Delay(2000);
-                sending_Status.Text = "Ready";
-                sending_Status.ForeColor = Color.Black;
-                waitForEnd = false;
-            }
+            button_SEND.Enabled = true;
+            button_browsefile.Enabled = true;
+            sending_Status.Text = "Message Sent";
+            sending_Status.ForeColor = Color.Black;
+            await Task.Delay(2000);
+            sending_Status.Text = "Ready";
+            sending_Status.ForeColor = Color.Black;
+            waitForEnd = false;
         }
 
         private async Task receivingStatusAsync()
@@ -242,8 +236,8 @@ namespace RxTx_with_Arduino
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                textbox_filepath.Text = openFileDialog.FileName; // Show file path in label
-                fileContent = File.ReadAllText(openFileDialog.FileName); // Read file content
+                textbox_filepath.Text = openFileDialog.FileName;
+                fileContent = File.ReadAllText(openFileDialog.FileName);
             }
         }
 

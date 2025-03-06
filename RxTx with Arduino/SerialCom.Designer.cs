@@ -262,7 +262,7 @@
             this.button_browsefile.Name = "button_browsefile";
             this.button_browsefile.Size = new System.Drawing.Size(117, 34);
             this.button_browsefile.TabIndex = 8;
-            this.button_browsefile.Text = "Browse";
+            this.button_browsefile.Text = "Add File";
             this.button_browsefile.UseVisualStyleBackColor = true;
             this.button_browsefile.Click += new System.EventHandler(this.button_browsefile_Click);
             // 
