@@ -292,7 +292,7 @@
             this.label2.TabIndex = 15;
             this.label2.Text = "intervals:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label2.Click += new System.EventHandler(this.label2_Click_1);
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // button_start_repeat
             // 
