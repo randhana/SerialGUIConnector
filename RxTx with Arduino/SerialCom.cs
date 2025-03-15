@@ -17,15 +17,15 @@ namespace RxTx_with_Arduino
     {
         string serialDataIn;  // To get serial data 
         bool waitForEnd = false;
-        private System.Timers.Timer repeatTimer; 
-        private string fileContent; // To store the TXT file content
-        private bool isRepeating = false; 
+        private System.Timers.Timer repeatTimer;
+        private string filePath; // Store file path instead of content
+        private bool isRepeating = false;
 
         public SerialCom()
         {
             InitializeComponent();
             repeatTimer = new System.Timers.Timer();
-            repeatTimer.Elapsed += RepeatTimerElapsed; 
+            repeatTimer.Elapsed += RepeatTimerElapsed;
         }
 
         private void SerialCom_Load(object sender, EventArgs e)
@@ -41,11 +41,16 @@ namespace RxTx_with_Arduino
             labelSTATUS.ForeColor = Color.Red;
 
             comboBox_lineEnding.Items.AddRange(new string[] { "None", "Line Feed (LF)", "Carriage Return (CR)", "CR + LF (CRLF)" });
-            comboBox_lineEnding.SelectedIndex = 0;
+            LoadSettings(); // Load saved settings
 
-            comboBox_BAUD_RATE.Text = "9600";
             string[] portLists = SerialPort.GetPortNames();
             comboBox_COM_PORT.Items.AddRange(portLists);
+
+            // Auto-open port if it’s available and was saved
+            if (!string.IsNullOrEmpty(comboBox_COM_PORT.Text) && portLists.Contains(comboBox_COM_PORT.Text))
+            {
+                buttonOPEN_Click(null, null);
+            }
         }
 
         private void buttonOPEN_Click(object sender, EventArgs e)
@@ -63,10 +68,9 @@ namespace RxTx_with_Arduino
                 button_start_repeat.Enabled = true;
                 progressBar_STATUSbar.Value = 100;
                 labelSTATUS.Text = "CONNECTED";
-                button_start_repeat.Text = "Start Repeating";
                 labelSTATUS.ForeColor = Color.Green;
 
-                comboBox_BAUD_RATE.Text = "9600";
+                SaveSettings(); // Save settings after opening port
             }
             catch (Exception error)
             {
@@ -92,8 +96,6 @@ namespace RxTx_with_Arduino
                     richTextBox_Txt_Receiver.Text = "";
                     labelSTATUS.ForeColor = Color.Red;
 
-                    comboBox_BAUD_RATE.Text = "9600";
-
                     sending_Status.Text = "Ready";
                     sending_Status.ForeColor = Color.Gray;
                 }
@@ -110,7 +112,7 @@ namespace RxTx_with_Arduino
             {
                 try
                 {
-                    repeatTimer.Stop(); // Stop timer if running
+                    repeatTimer.Stop();
                     serialPort1.Close();
                 }
                 catch (Exception error)
@@ -118,6 +120,7 @@ namespace RxTx_with_Arduino
                     MessageBox.Show(error.Message);
                 }
             }
+            SaveSettings(); // Save settings on close
         }
 
         private void button_SEND_Click(object sender, EventArgs e)
@@ -127,14 +130,14 @@ namespace RxTx_with_Arduino
                 if (waitForEnd)
                 {
                     button_SEND.Enabled = false;
-                    MessageBox.Show("Please Wait!" + serialDataIn + "\n" + waitForEnd);
+                    MessageBox.Show("Please Wait!");
                     return;
                 }
 
                 string textToSend = textBox_Txt_Send.Text;
-                if (!string.IsNullOrEmpty(fileContent) && string.IsNullOrEmpty(textToSend))
+                if (string.IsNullOrEmpty(textToSend) && !string.IsNullOrEmpty(filePath))
                 {
-                    textToSend = fileContent;
+                    textToSend = File.ReadAllText(filePath); // Re-read file each time
                 }
 
                 if (!string.IsNullOrEmpty(textToSend))
@@ -142,14 +145,10 @@ namespace RxTx_with_Arduino
                     serialPort1.Write(textToSend + GetLineEnding());
                     richTextBox_Txt_Receiver.Text += "";
                     textBox_Txt_Send.Text = "";
-                    sending_Status.Text = "Message Sent"; // Immediate update
+                    sending_Status.Text = "Message Sent";
                     sending_Status.ForeColor = Color.Black;
-                    button_SEND.Enabled = true; // Re-enable immediately
-                    waitForEnd = false; // Reset for repeat
-                    textbox_filepath.Text = ""; // clear the file path
-                    fileContent = ""; // Clear fileContent after send
-
-
+                    button_SEND.Enabled = true;
+                    waitForEnd = false;
                 }
                 else
                 {
@@ -177,7 +176,6 @@ namespace RxTx_with_Arduino
             if (sending_Status.Text == "Ready")
             {
                 receivingStatusAsync();
-                // No acknowledgment: //serialPort1.Write("\n");
             }
             richTextBox_Txt_Receiver.Text += serialDataIn;
         }
@@ -196,7 +194,6 @@ namespace RxTx_with_Arduino
 
         private async Task receivingStatusAsync()
         {
-            // Removed the condition serialDataIn == "\n" since we’re now sending \n after any received data
             button_SEND.Enabled = true;
             button_browsefile.Enabled = true;
             sending_Status.Text = "Message Received";
@@ -236,20 +233,20 @@ namespace RxTx_with_Arduino
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                textbox_filepath.Text = openFileDialog.FileName;
-                fileContent = File.ReadAllText(openFileDialog.FileName);
+                filePath = openFileDialog.FileName;
+                textbox_filepath.Text = filePath;
+                SaveSettings(); // Save file path
             }
         }
-
-
 
         private void RepeatTimerElapsed(object sender, ElapsedEventArgs e)
         {
             this.Invoke(new Action(() =>
             {
-                if (serialPort1.IsOpen && !waitForEnd)
+                if (serialPort1.IsOpen && !waitForEnd && !string.IsNullOrEmpty(filePath))
                 {
-                    serialPort1.Write(fileContent + GetLineEnding());
+                    string content = File.ReadAllText(filePath); // Re-read file each time
+                    serialPort1.Write(content + GetLineEnding());
                     richTextBox_Txt_Receiver.Text += "";
                     sending_Status.Text = "Message sent (repeating)";
                     sending_Status.ForeColor = Color.Black;
@@ -269,30 +266,6 @@ namespace RxTx_with_Arduino
             }
         }
 
-        private void label1_Click(object sender, EventArgs e) { }
-        private void label2_Click(object sender, EventArgs e) { }
-        private void groupBox1_Enter(object sender, EventArgs e) { }
-        private void label3_Click(object sender, EventArgs e) { }
-        private void label4_Click(object sender, EventArgs e) { }
-        private void SerialCom_FormClosed(object sender, FormClosedEventArgs e) { }
-        private void Title_Click(object sender, EventArgs e) { }
-        private void button_browsefile_HelpRequest(object sender, EventArgs e) { }
-
-        private void textbox_filepath_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button_start_repeat_Click_1(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void button_start_repeat_Click(object sender, EventArgs e)
         {
             if (!serialPort1.IsOpen)
@@ -301,7 +274,7 @@ namespace RxTx_with_Arduino
                 return;
             }
 
-            if (string.IsNullOrEmpty(fileContent))
+            if (string.IsNullOrEmpty(filePath))
             {
                 MessageBox.Show("Please load a text file first!");
                 return;
@@ -329,6 +302,45 @@ namespace RxTx_with_Arduino
                 sending_Status.Text = "Ready";
                 sending_Status.ForeColor = Color.Gray;
             }
+            SaveSettings(); // Save repeat state and interval
         }
+
+        private void LoadSettings()
+        {
+            comboBox_COM_PORT.Text = Properties.Settings.Default.COMPort;
+            comboBox_BAUD_RATE.Text = Properties.Settings.Default.BaudRate ?? "9600";
+            textbox_filepath.Text = Properties.Settings.Default.FilePath;
+            filePath = Properties.Settings.Default.FilePath;
+            textBox_interval.Text = Properties.Settings.Default.IntervalSeconds ?? "1";
+            comboBox_lineEnding.SelectedIndex = Properties.Settings.Default.LineEndingIndex;
+            if (Properties.Settings.Default.IsRepeating && !string.IsNullOrEmpty(filePath) && serialPort1.IsOpen)
+            {
+                isRepeating = true;
+                button_start_repeat.Text = "Stop Repeating";
+                repeatTimer.Interval = int.Parse(textBox_interval.Text) * 1000;
+                repeatTimer.Start();
+            }
+        }
+
+        private void SaveSettings()
+        {
+            Properties.Settings.Default.COMPort = comboBox_COM_PORT.Text;
+            Properties.Settings.Default.BaudRate = comboBox_BAUD_RATE.Text;
+            Properties.Settings.Default.FilePath = filePath;
+            Properties.Settings.Default.IntervalSeconds = textBox_interval.Text;
+            Properties.Settings.Default.LineEndingIndex = comboBox_lineEnding.SelectedIndex;
+            Properties.Settings.Default.IsRepeating = isRepeating;
+            Properties.Settings.Default.Save();
+        }
+
+        private void label1_Click(object sender, EventArgs e) { }
+        private void label2_Click(object sender, EventArgs e) { }
+        private void groupBox1_Enter(object sender, EventArgs e) { }
+        private void label3_Click(object sender, EventArgs e) { }
+        private void label4_Click(object sender, EventArgs e) { }
+        private void SerialCom_FormClosed(object sender, FormClosedEventArgs e) { }
+        private void Title_Click(object sender, EventArgs e) { }
+        private void button_browsefile_HelpRequest(object sender, EventArgs e) { }
+        private void textbox_filepath_TextChanged(object sender, EventArgs e) { }
     }
 }
